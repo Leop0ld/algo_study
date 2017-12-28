@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-int getMax(int numArr[]);
-float getAverage(float numArr[]);
+int getMax(int numArr[], int length);
+float getAverage(float numArr2[], int length);
 
 int main() {
   char numberStr[100];
@@ -21,32 +21,31 @@ int main() {
     p = strtok(NULL, " ");
   }
 
-  maxNum = getMax(numberArr);
+  maxNum = getMax(numberArr, loop);
 
   for(i = 0; i < loop; i++) {
-    resultArr[i] = numberArr[i] / maxNum * 100;
+    resultArr[i] = (float)numberArr[i] / (float)maxNum * 100.0;
   }
 
-  printf("%.2f\n", getAverage(resultArr));
+  printf("%.2f\n", getAverage(resultArr, loop));
 
   return 0;
 }
 
-int getMax(int numArr[]) {
-  int i, maxNum = numArr[0];
-  int length = sizeof(*numArr) / sizeof(numArr[0]);
+int getMax(int numArr[], int length) {
+  int i;
+  int maxNum = numArr[0];
 
   for(i = 1; i < length; i++) {
-    if(maxNum < i) maxNum = i;
+    if(maxNum < numArr[i]) maxNum = numArr[i];
   }
 
   return maxNum;
 }
 
-float getAverage(float numArr2[]) {
+float getAverage(float numArr2[], int length) {
   float sum = 0.0;
   int i;
-  int length = sizeof(*numArr2) / sizeof(numArr2[0]);
 
   for(i = 0; i < length; i++) {
     sum += numArr2[i];
